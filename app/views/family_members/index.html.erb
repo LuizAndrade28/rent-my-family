@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <h1>Rent a Family Member</h1>
+
+  <ul>
+    <% @family_members.each do |family_member| %>
+      <li><%= link_to family_member.name, family_member_path(family_member) %></li>
+    <% end %>
+  </ul>
+
+  <%= link_to "Add a family_member" , new_family_member_path %>
+
+</div>
