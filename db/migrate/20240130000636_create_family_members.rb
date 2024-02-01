@@ -8,7 +8,6 @@ class CreateFamilyMembers < ActiveRecord::Migration[7.1]
       t.string :profile_title
       t.float :value_hour
       t.datetime :available_date
-      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
