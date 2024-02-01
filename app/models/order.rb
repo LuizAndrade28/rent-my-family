@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :family_members, dependent: :destroy
+  belongs_to :family_member
 end
