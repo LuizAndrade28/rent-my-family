@@ -22,10 +22,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_001851) do
     t.string "profile_title"
     t.float "value_hour"
     t.datetime "available_date"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_family_members_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -61,7 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_001851) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "family_members", "users"
   add_foreign_key "orders", "family_members"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "family_members"
