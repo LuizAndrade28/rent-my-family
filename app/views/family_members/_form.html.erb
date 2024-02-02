@@ -1,0 +1,19 @@
+<%= simple_form_for (@family_member) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
+  [:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :kinship %>
+    <%= f.input :description%>
+    <%= f.input :profile_title %>
+    <%= f.input :value_hour %>
+    <%= f.input :available_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary"%>
+  </div>
+<% end %>
