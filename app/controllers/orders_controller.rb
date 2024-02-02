@@ -1,11 +1,15 @@
 class OrdersController < ApplicationController
+
+
   def index
     @orders = Order.all
+    @user_orders = current_user.orders
   end
 
   def show
     @order = Order.find(params[:id])
     @family_members = @order.family_members
+
   end
 
   def new

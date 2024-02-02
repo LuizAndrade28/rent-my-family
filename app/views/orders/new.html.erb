@@ -1,0 +1,10 @@
+<h1> Novo Pedido</h1>
+
+<%=simple_form_for @order do |f| %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <% f.input :status %>
+  <%=f.input :hours %>
+  <% f.input :user_id %>
+  <%= f.button :submit %>
+ <% end %>
