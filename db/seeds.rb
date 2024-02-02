@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 # end
-User.create!(email: "teste@teste.com", password: "123456", password_confirmation: "123456")
+# User.create!(email: "teste@teste.com", password: "123456", password_confirmation: "123456")
 FamilyMember.destroy_all
 
 30.times do
