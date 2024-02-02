@@ -1,2 +1,11 @@
 <h1>page show</h1>
-
+<p> <%= @family_member.first_name %> </p>
+<p> <%= @family_member.last_name %> </p>
+<p> <%= @family_member.kinship %> </p>
+<p> <%= @family_member.description %> </p>
+<p> <%= @family_member.profile_title %> </p>
+<p> <%= @family_member.value_hour %> </p>
+<p> <%= @family_member.available_date %> </p>
+<%= link_to 'Edit', edit_family_member_path(@family_member), class: "btn btn-primary" %> |
+<%= link_to 'Back', family_members_path, class: "btn btn-success" %>
+``
