@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :family_members do
     resources :orders, only: %i[new create]
     resources :reviews, only: %i[new create]
+  
   end
   resources :orders, only: %i[show index]
 end
