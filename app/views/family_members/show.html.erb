@@ -4,7 +4,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= image_tag('john_wick', size:'550x350', class:'my-3') %>
+      <%= image_tag('john_wick', class:'my-3 w-100') %>
     </div>
     <div class="col-md-6 my-3">
       <p>
@@ -56,7 +56,7 @@
   </div>
   <% total_rating += review.rating %>
 <% end %>
-
+    
 <% average_rating = @reviews.any? ? (total_rating.to_f / @reviews.size).round(2) : 0 %>
 
 <div class="mt-3">
