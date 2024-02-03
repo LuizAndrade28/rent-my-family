@@ -1,5 +1,7 @@
-<div class="text-center mt-5">
+
+<div class="banner text-center">
     <h1>Rent my Family</h1>
+    <%= render 'shared/banner'%>
 </div>
 
 <div class="container mt-5 vh-100">
@@ -12,17 +14,17 @@
           </div>
           <div class="d-flex flex-column align-items-around">
             <div class="d-flex mt-1">
-              <div class="w-10">
-                <strong><%= family_member.first_name %>
-                <span class="text-muted font-weight-normal"><%= family_member.last_name %></strong></span>
+              <div>
+                <strong><%= family_member.first_name %></strong>
+                <span class="text-muted font-weight-normal"><%= family_member.last_name %></span>
                 <div class="text-muted"><strong><%= family_member.kinship %></strong></div>
               </div>
             </div>
-            <div class="d-flex align-items-end justify-content-between pt-3 w-10 flex-grow">
-              <div class="w-10">
+            <div class="d-flex align-items-end justify-content-between pt-3 flex-grow">
+              <div>
                 <i class="fas fa-quote-left me-2"></i><small class="flex-grow-1"><%= family_member.description %></small>
               </div>
-              <%= link_to "Rent", family_member_path(family_member.id), class: "btn btn-primary" %>
+              <%= link_to "Rent", family_member_path(family_member.id), class: "btn btn-primary " %>
             </div>
           </div>
         </div>
