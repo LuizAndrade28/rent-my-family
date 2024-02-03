@@ -1,10 +1,14 @@
-<h1> Seus pedidos </h1>
+<div class = container>
+  <h1> Seus pedidos </h1>
 
-<ul>
-  <% @orders.each do |order| %>
-    <li>
-       <%= order.family_member.profile_title %>
-       <%= order.quantity_hour %>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @orders.each do |order| %>
+      <li>
+        <%= order.family_member.profile_title %>
+        <%= order.quantity_hour %>
+        <%= %>
+        <%= link_to "detalhes do pedido", order_path(order) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
