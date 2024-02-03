@@ -1,10 +1,13 @@
 <h1> Novo Pedido</h1>
+<br>
+<div class = container>
+  <div class = row>
+    <div class = col-md-12>
+<%= simple_form_for [ @family_member, @order ] do |f| %>
+  <%= f.input :quantity_hour %>
+  <%= f.button :submit, class: "btn btn-primary" %>
 
-<%=simple_form_for @order do |f| %>
-  <%= f.input :description %>
-  <%= f.input :price %>
-  <% f.input :status %>
-  <%=f.input :hours %>
-  <% f.input :user_id %>
-  <%= f.button :submit %>
  <% end %>
+ <br>
+  <%= link_to 'Back', @family_members_path, class: "btn btn-success" %>
+</div>

@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @family_members = @order.family_members
+    @family_members = @order.family_member
 
   end
 
@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(quantity_hour: order_params[:quantity_hour], family_member_id: params[:family_member_id])
     @order.user = current_user
     if @order.save
       redirect_to order_path(@order)
@@ -31,6 +31,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:title, :description, :value_hour, :available_date)
+    params.require(:order).permit(:quantity_hour, :family_member_id, :user_id)
   end
 end
