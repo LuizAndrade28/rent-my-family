@@ -8,6 +8,7 @@ class FamilyMembersController < ApplicationController
 
   def show
     @name = "#{@family_member[:first_name]} #{@family_member[:last_name]}"
+    @reviews = Review.joins(:order).where(order: {family_member_id: @family_member.id})
   end
 
   def new
@@ -47,6 +48,6 @@ class FamilyMembersController < ApplicationController
 
   def family_member_params
     params.require(:family_member).permit(:first_name, :last_name, :kinship,
-                                          :description, :profile_title, :value_hour, :available_date)
+                                          :description, :profile_title, :value_hour, :available_date, :photo)
   end
 end
