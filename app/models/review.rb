@@ -1,4 +1,4 @@
 class Review < ApplicationRecord
   belongs_to :user
-  belongs_to :family_member
+  belongs_to :order
 end

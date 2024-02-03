@@ -8,6 +8,7 @@ class FamilyMembersController < ApplicationController
 
   def show
     @name = "#{@family_member[:first_name]} #{@family_member[:last_name]}"
+    @reviews = Review.joins(:order).where(order: {family_member_id: @family_member.id})
   end
 
   def new
