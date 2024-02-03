@@ -15,11 +15,14 @@
             <%= link_to "Home", "/", class: "nav-link" %>
           </li>
           <li class="nav-item">
+            <%= link_to "Cadastrar", new_family_member_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
             <%= link_to "Pedidos", orders_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar me-2" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+            <%= cl_image_tag current_user.photo.key, height: 45, width: 45, crop: :fill, class: "avatar", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Perfil", user_path(current_user), class: "dropdown-item" %>
