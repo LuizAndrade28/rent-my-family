@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
   def new
     @family_member = FamilyMember.find(params[:family_member_id])
     @review = Review.new
-    @review.family_member = @family_member
   end
 
   def create
@@ -13,7 +12,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to family_member_path(@family_member)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
