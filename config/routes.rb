@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     resources :orders, only: %i[new create]
     resources :reviews, only: %i[new create]
   end
-  resources :orders, only: %i[show index]
+  resources :orders, only: %i[show index destroy]
   resources :users, only: %i[show]
 end
