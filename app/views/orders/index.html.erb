@@ -1,13 +1,10 @@
 <h1> Seus pedidos </h1>
 
-<%= form_for orders_path do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <br>
-  <%= f.submit %>
-<% end %>
-<% @user_orders.each do |order| %>
-  <p>Pedido ##<%= order.id %>: <%= order.description %></p>
+<ul>
+  <% @orders.each do |order| %>
+    <li>
+       <%= order.family_member.profile_title %>
+       <%= order.quantity_hour %>
+    </li>
   <% end %>
+</ul>
