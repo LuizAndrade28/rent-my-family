@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   resources :family_members do
     resources :orders, only: %i[new create]
+  end
+  resources :orders, only: %i[show index] do
     resources :reviews, only: %i[new create]
   end
   resources :orders, only: %i[show index destroy]
