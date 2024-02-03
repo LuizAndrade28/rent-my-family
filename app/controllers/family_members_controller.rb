@@ -7,6 +7,7 @@ class FamilyMembersController < ApplicationController
   end
 
   def show
+    @name = "#{@family_member[:first_name]} #{@family_member[:last_name]}"
   end
 
   def new
@@ -48,5 +49,4 @@ class FamilyMembersController < ApplicationController
     params.require(:family_member).permit(:first_name, :last_name, :kinship,
                                           :description, :profile_title, :value_hour, :available_date)
   end
-
 end
