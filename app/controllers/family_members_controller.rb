@@ -1,6 +1,6 @@
 class FamilyMembersController < ApplicationController
-  before_action :set_family_member, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_family_member, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     @family_members = FamilyMember.all
@@ -17,10 +17,11 @@ class FamilyMembersController < ApplicationController
 
   def create
     @family_member = FamilyMember.new(family_member_params)
+    @family_member.user = current_user
     if @family_member.save
       redirect_to family_member_path(@family_member)
     else
-      render :new, status: :unprocessable_entit
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -48,6 +49,6 @@ class FamilyMembersController < ApplicationController
 
   def family_member_params
     params.require(:family_member).permit(:first_name, :last_name, :kinship,
-                                          :description, :profile_title, :value_hour, :available_date, :photo)
+                                          :description, :profile_title, :value_hour, :photo)
   end
 end
