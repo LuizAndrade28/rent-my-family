@@ -22,7 +22,11 @@
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar me-2" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= cl_image_tag(current_user.photo.key, height: 45, width: 45, crop: :thumb, class: "avatar", alt: "dropdown menu", gravity: :face) %>
+          <% if current_user.photo.key %>
+            <%= cl_image_tag(current_user.photo.key, height: 45, width: 45, crop: :thumb, class: "avatar ms-2", alt: "dropdown menu", gravity: :face) %>
+          <% else %>
+            <%= image_tag('user.png', height: 40, class: "avatar ms-2") %>
+          <% end %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Perfil", user_path(current_user), class: "dropdown-item" %>
