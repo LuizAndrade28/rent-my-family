@@ -1,11 +1,13 @@
 class ReviewsController < ApplicationController
-  before_action :set_order, only: [:new, :create]
+  before_action :set_order, only: %i[new create]
+  before_action :authenticate_user!
+
   def new
     @review = Review.new
   end
 
   def create
-    @review = Review.new(review_params)    
+    @review = Review.new(review_params)
     @review.user = current_user
     @review.order_id = @order.id
     if @review.save

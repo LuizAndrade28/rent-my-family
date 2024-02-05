@@ -2,12 +2,12 @@
   <h1> Seus pedidos </h1>
 
   <ul>
-    <% @orders.each do |order| %>
+    <% @user_orders.each do |order| %>
       <li>
-        <%= order.family_member.profile_title %>
-        <%= order.quantity_hour %>
-        <%= %>
-        <%= link_to "detalhes do pedido", order_path(order) %>
+        <p>Pedido número: <%= order.id %></p>
+        <p>Criada em: <%= order.created_at.strftime("%d/%m/%Y") %> </p>
+        <p>Aluguel agendado para: <%= order.rent_date.strftime("%d/%m/%Y") %></p>
+        <%= link_to "Detalhes do pedido", order_path(order), class: "btn btn-primary" %>
       </li>
     <% end %>
   </ul>

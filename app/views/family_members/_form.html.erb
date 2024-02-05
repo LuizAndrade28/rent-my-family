@@ -1,20 +1,20 @@
 <%= simple_form_for (@family_member) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
-  [:base].present? %>
-
   <div class="form-inputs">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :kinship %>
-    <%= f.input :description%>
-    <%= f.input :profile_title %>
-    <%= f.input :value_hour %>
-    <%= f.input :available_date %>
-    <%= f.input :photo, as: :file %>
+    <%= f.error_notification %>
+    <% f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
+    [:base].present? %>
+
+    <%= f.input :first_name, :label => 'Primeiro nome'%>
+    <%= f.input :last_name, :label => 'Sobrenome' %>
+    <%= f.input :kinship, :label => 'Parentesco' %>
+    <%= f.input :description, :label => 'Descrição',
+                              :placeholder => 'Uma breve descrição de seu familiar'%>
+    <%= f.input :profile_title, :label => 'Título' %>
+    <%= f.input :value_hour, :label => 'Valor por hora' %>
+    <%= f.input :photo, as: :file, :label => 'Foto' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary"%>
+    <%= f.submit "Cadastrar", class: "btn btn-primary"%>
   </div>
 <% end %>

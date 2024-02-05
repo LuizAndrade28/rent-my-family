@@ -1,35 +1,30 @@
-<div class="container" style="background-color: #FFFAF4;">
-  <div class="banner text-center position-relative" style="background-color: rgba(255, 255, 255, 0.5);">
-    <%= render 'shared/banner'%>
-    <h1 class="position-absolute top-50 start-50 translate-middle text-white ">Rent my Family</h1>
-  </div>
+<%= render 'shared/banner'%>
 
-  <div class="container mt-5 vh-100">
-    <div class="d-flex flex-wrap my-2 justify-content-around">
-      <% @family_members.first(6).each do |family_member| %>
-        <div class="d-flex justify-content-center bg-white rounded shadow w-25 m-3">
-          <div class="p-3 rounded-bottom d-flex flex-column">
-            <div class="d-flex justify-content-center">
-              <%= image_tag('john.jpg', class: "w-100") %>
+<div class="container mt-5 vh-100">
+  <div class="d-flex flex-wrap my-2 justify-content-around">
+    <% @family_members.first(6).each do |family_member| %>
+      <div class="d-flex justify-content-center bg-white rounded shadow w-25 m-3">
+        <div class="p-3 rounded-bottom d-flex flex-column">
+          <div class="d-flex justify-content-center">
+            <%= cl_image_tag(family_member.photo.key, class: "w-100 h-100") %>
+          </div>
+          <div class="d-flex flex-column align-items-around">
+            <div class="d-flex mt-1">
+              <div>
+                <strong><%= family_member.first_name %></strong>
+                <span class="text-muted font-weight-normal"><%= family_member.last_name %></span>
+                <div class="text-muted"><strong><%= family_member.description %></strong></div>
+              </div>
             </div>
-            <div class="d-flex flex-column align-items-around">
-              <div class="d-flex mt-1">
-                <div>
-                  <strong><%= family_member.first_name %></strong>
-                  <span class="text-muted font-weight-normal"><%= family_member.last_name %></span>
-                  <div class="text-muted"><strong><%= family_member.kinship %></strong></div>
-                </div>
+            <div class="d-flex align-items-end justify-content-between pt-3 flex-grow">
+              <div>
+                <i class="fas fa-quote-left me-2"></i><small class="flex-grow-1"><%= family_member.description %></small>
               </div>
-              <div class="d-flex align-items-end justify-content-between pt-3 flex-grow">
-                <div>
-                  <i class="fas fa-quote-left me-2"></i><small class="flex-grow-1"><%= family_member.description %></small>
-                </div>
-                <%= link_to "Rent", family_member_path(family_member.id), class: "btn btn-primary " %>
-              </div>
+              <%= link_to "Rent", family_member_path(family_member.id), class: "btn btn-primary " %>
             </div>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
