@@ -4,8 +4,8 @@
   background-size: cover;
   position: relative;
   padding: 150px 0;
-  height: 70vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("banner_home.jpg");
+  height: 100vh;
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%), url("banner_home.jpg");
 
   h1 {
     margin: 0;
@@ -18,6 +18,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+
   }
+}
+
+.banner:hover {
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 100%), url("banner_home.jpg");
+  transition: 0.3s;
 }
