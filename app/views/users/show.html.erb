@@ -1,20 +1,20 @@
 <div class="container">
   <div class="h-100">
-    <div class="border bg-users my-5">
-    <%= link_to "Cadastrar", new_family_member_path, class: "nav-link" %>
+    <div class="border bg-users my-5 p-3 rounded">
+      <%= link_to "Cadastrar", new_family_member_path, class: "nav-link btn btn-primary" %>
       <div class="mt-5 row justify-content-center">
-        <div class="col-sm-6 w-25 border shadow p-4 m-2 bg-white">
-          <h2  class="text-center mb-2">Seus dados</h2>
-          <p>Nome:<%= @user.first_name %>
-          <p>Sobrenome:<%= @user.last_name %>
-          <p>Email:<%= @user.email %>
-          <p><%= link_to "Editar perfil", edit_user_registration_path %></p>
+        <div class="col-sm-6 w-25 border shadow p-4 m-2 bg-white rounded">
+          <h2 class="text-center mb-2">Seus dados</h2>
+          <p><strong>Nome:</strong> <%= @user.first_name %></p>
+          <p><strong>Sobrenome:</strong> <%= @user.last_name %></p>
+          <p><strong>Email:</strong> <%= @user.email %></p>
+          <p><%= link_to "Editar perfil", edit_user_registration_path, class: "btn btn-secondary" %></p>
         </div>
-        <div class="col-sm-6 w-25 border shadow p-4 m-2 bg-white">
-        <h2 class="text-center mb-2">Seus pedidos</h2>
-          <ul>
+        <div class="col-sm-6 w-25 border shadow p-4 m-2 bg-white rounded">
+          <h2 class="text-center mb-2">Seus pedidos</h2>
+          <ul class="list-group">
             <% @orders.each do |pedido| %>
-              <li><%= link_to pedido.id, order_path(pedido) %></li>
+              <li class="list-group-item"><%= link_to pedido.id, order_path(pedido) %></li>
             <% end %>
           </ul>
         </div>

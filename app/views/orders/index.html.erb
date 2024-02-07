@@ -1,6 +1,8 @@
 <div class = container>
-  <h1> Seus pedidos </h1>
 
+<div class= "card">
+   <h1> <strong>Seus pedidos<strong> </h1>
+      <div class="main">
   <ul>
     <% @user_orders.each do |order| %>
       <li>
@@ -10,5 +12,25 @@
         <%= link_to "Detalhes do pedido", order_path(order), class: "btn btn-primary" %>
       </li>
     <% end %>
+
+        <%= image_tag("")%>
+        <h2> </h2>
+        <p class="description"> </p>
+        <div class="card-info">
+          <div class="date">
+            <ins></ins>
+            <p>  </p>
+          </div>
+          <div class="hour">
+            <ins></ins>
+            <p></p>
+        </div>
+      </div>
+      <hr> </hr>
+      <div class="family">
+        <div class="wrapper">
+        </div>
+      </div>
+    </div>
   </ul>
 </div>
