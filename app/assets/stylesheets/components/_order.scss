@@ -1,0 +1,111 @@
+
+
+.card{
+  max-width: 500px;
+  margin: 5rem auto;
+  border: 1px solid hsla(0, 0%, 0%, 0.133);
+  background-color: #eb9900;
+  background: linear-gradient(0deg, rgba(217, 229, 233, 0.996) 0%, rgba(226, 215, 204, 0.5) 100% );
+  box-shadow: 0 7px 20px 5px #00000088;
+  border-radius: 0.7rem;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  overflow: hidden;
+  transition: 0.2s all;
+  hr{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #88888855;
+    margin-top: 0;
+
+  }
+  ins{
+    text-decoration: none;
+
+  }
+
+  .main{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 1rem;
+    color: rgb(0, 0, 0);
+    .card-img{
+      border-radius: 0.5rem;
+      max-width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .description{
+      margin: 0.5rem 0;
+      color: #a89ec9;
+
+    }
+    .card-info{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .date{
+        color: #ee83e5;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+
+      }
+
+    }
+
+    .family{
+      display: flex;
+      align-items: center;
+      margin-top: 0.2rem;
+      margin-bottom: -0.3rem;
+      .wrapper{
+        display: flex;
+        align-items: center;
+        border: 1px solid #FFFFFF22;
+        padding: 0.3rem;
+        margin: 0;
+        margin-right: 0.5rem;
+        border-radius: 100%;
+        box-shadow: inset 0 0 0 4px #000000aa;
+        img{
+          border-radius: 100%;
+          border: 1px solid #FFFFFF22;
+          width: 2rem;
+          height: 2rem;
+          object-fit: cover;
+          margin: 0;
+
+        }
+      }
+    }
+  }
+  ::before{
+    position: fixed;
+    content: '';
+    box-shadow: 0 0 100px 40px #ffffff08;
+    top: -10%;
+    left: -100%;
+    transform: rotate(-45deg);
+    width: 60rem;
+    transition: 0.7s all;
+
+  }
+  &:hover{
+    border: 1px solid #FFFFFF44;
+    box-shadow: 0 7px 50px 10px #000000aa;
+    transform: scale(1.015);
+    filter: brightness(1.3);
+    ::before{
+      filter: brightness(0.5);
+      top: -100%;
+      left: -200%;
+
+
+    }
+  }
+
+
+
+}
