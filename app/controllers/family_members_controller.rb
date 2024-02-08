@@ -4,6 +4,7 @@ class FamilyMembersController < ApplicationController
 
   def index
     @family_members = FamilyMember.all
+    @orders = Order.all
   end
 
   def show

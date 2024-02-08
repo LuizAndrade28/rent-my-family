@@ -1,15 +1,18 @@
-<div class = container>
-  <h1>Detalhes do pedido </h1>
-  <div>
-    <p> Pedido: <%= @order.id %> </p>
-    <p>Nome: <%= @order.family_member.first_name %> <%= @order.family_member.last_name %></p>
-    <p>Quantidade de horas alugadas: <%= @order.quantity_hour %></p>
-    <p>Criada em: <%= @order.created_at.strftime("%d/%m/%Y") %> </p>
-    <p>Aluguel agendado para: <%= @order.rent_date.strftime("%d/%m/%Y") %></p>
+<div class="card">
+    <div class = container>
+      <h1>Detalhes do pedido </h1>
+      <div>
+        <p> Pedido: <%= @order.id %> </p>
+        <p>Nome: <%= @order.family_member.first_name %> <%= @order.family_member.last_name %></p>
+        <p>Quantidade de horas alugadas: <%= @order.quantity_hour %></p>
+        <p>Criada em: <%= @order.created_at.strftime("%d/%m/%Y") %> </p>
+        <p>Aluguel agendado para: <%= @order.rent_date.strftime("%d/%m/%Y") %></p>
+      </div>
+      <%= link_to "Cancelar pedido", order_path(@order), data: { turbo_method: :delete }, id: "cancel-order", class: "btn btn-danger" %>
+      <% if current_user && @order_review == nil %>
+        <%= link_to "Criar review", new_order_review_path(@order), class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to "Voltar", orders_path, class: "btn btn-primary" %>
+    </div>
   </div>
-  <%= link_to "Cancelar pedido", order_path(@order), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-  <% if current_user && @order_review == nil %>
-    <%= link_to "Criar review", new_order_review_path(@order), class: "btn btn-primary" %>
-  <% end %>
-  <%= link_to "Voltar", orders_path, class: "btn btn-primary" %>
 </div>
