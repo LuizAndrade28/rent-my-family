@@ -1,29 +1,78 @@
-<div class="container">
-  <div class="h-100">
-    <div class="border bg-users my-5 p-3 rounded">
-      <%= link_to "Cadastrar", new_family_member_path, class: "nav-link btn btn-primary" %>
-      <div class="mt-5 row justify-content-center">
-        <div class="col-sm-6 w-25 border shadow p-4 m-2 bg-white rounded">
-          <h2 class="text-center mb-2">Seus dados</h2>
-          <p><strong>Nome:</strong> <%= @user.first_name %></p>
-          <p><strong>Sobrenome:</strong> <%= @user.last_name %></p>
-          <p><strong>Email:</strong> <%= @user.email %></p>
-          <p><%= link_to "Editar perfil", edit_user_registration_path, class: "btn btn-secondary" %></p>
+<!-- index.html -->
+<div class="border bg-users h-100 p-5">
+  <div class="border bg-white h-100 p-5 shadow">
+    <div class="h-100 d-flex p-2" data-controller="toggle">
+      <div class="d-flex flex-column w-25">
+        <div class="border h-25 bg-warning m-3 rounded-4 d-flex justify-content-center align-items-center btn shadow" data-action="click->toggle#fireDados">
+          <h4 class="fw-bold text-white m-0">Dados</h4>
         </div>
-        <div class="col-sm-6 w-25 border shadow p-4 m-2 bg-white rounded">
-          <h2 class="text-center mb-2">Seus pedidos</h2>
-          <ul class="list-group">
-            <% @orders.each do |pedido| %>
-              <li class="list-group-item"><%= link_to pedido.id, order_path(pedido) %></li>
-            <% end %>
-          </ul>
+        <div class="border h-25 bg-warning m-3 rounded-4 d-flex justify-content-center align-items-center btn shadow" data-action="click->toggle#firePedidos">
+          <h4 class="fw-bold text-white m-0">Pedidos</h4>
+        </div>
+        <div class="border h-25 bg-warning m-3 rounded-4 d-flex justify-content-center align-items-center btn shadow" data-action="click->toggle#fireFamiliares">
+          <h4 class="fw-bold text-white m-0">Familiares</h4>
+        </div>
+        <div class="border h-25 bg-warning m-3 rounded-4 d-flex justify-content-center align-items-center btn shadow" data-action="click->toggle#fireCadastro">
+          <h4 class="fw-bold text-white m-0">Novo cadastro</h4>
+        </div>
+      </div>
+      <div class="d-flex w-75 m-3 p-2 bg-warning rounded-4 shadow">
+        <div class="w-100 h-100 border bg-white rounded-4 p-5" data-toggle-target="togglableElement" data-toggle-element="dados">
+         <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex align-items-center">
+          <li><strong>Nome:</strong> <%= @name %></li>
+         </div>
+         <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex align-items-center">
+          <li><strong>Email:</strong> <%= current_user.email %></li>
+         </div>
+         <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex align-items-center">
+          <li><strong>Senha:</strong> **********</li>
+         </div>
+         <div class="rounded-3 mt-5 mx-1 w-50">
+            <%= link_to "Editar", edit_user_registration_path, class: "btn btn-outline-warning rounded-3 shadow-sm w-25" %>
+         </div>
+        </div>
+        <div class="w-100 h-100 border bg-white rounded-4 p-5 d-none" data-toggle-target="togglableElement" data-toggle-element="pedidos">
+          <% @orders.each do |order| %>
+            <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex justify-content-between align-items-center">
+              <li><strong>Pedido número:</strong> ID#RMF<%= @initials   %><%= order.id %></li>
+              <span class="text-secondary text-opacity-50">Visualizar</span>
+            </div>
+          <% end %>
+        </div>
+        <div class="w-100 h-100 border bg-white rounded-4 p-5 d-flex flex-wrap justify-content-center d-none" data-toggle-target="togglableElement" data-toggle-element="familiares">
+          <% @family_members.each do |family_member| %>
+          <div class="bg-users d-flex flex-column flex-grow-1 justify-content-around p-3 shadow-sm pedidos-box-size h-50 mb-2 mx-5">
+            <div class="d-flex justify-content-start align-items-center">
+              <div class="">
+                <%= cl_image_tag(family_member.photo.key, crop: :thumb, class: "avatar-large me-4", alt: "dropdown menu", gravity: :face) %>
+              </div>
+              <div class="ms-2">
+                <p class="f-member-85 p-0 m-0"><strong>Nome: </strong><%= family_member.first_name %></p>
+                <p class="f-member-85 p-0 m-0"><strong>Parentesco: </strong><%= family_member.kinship %></p>
+                <p class="f-member-85 p-0 m-0"><strong>Valor: </strong>R$<%= family_member.value_hour %>/hr</p>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="btn btn-outline-warning w-100 p-2 flex-grow-1">
+                <p class="m-0">Visualizar</p>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div class="w-100 h-100 border bg-white rounded-4 p-5 d-none" data-toggle-target="togglableElement" data-toggle-element="cadastro">
+          <%= render "family_members/form", class: "w-100" %>
+        </div>
+      </div>
+    </div>
+    <div class="me-3 pe-2">
+      <div class="d-flex justify-content-end">
+        <div class="w-100"></div>
+        <div class="w-50"></div>
+        <div class="w-25 shadow-sm">
+          <p class="m-0"> <%= link_to "Voltar", "/", class: "btn btn-outline-warning w-100 shadow-sm"%> </p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
- <% if current_user.photo.key %>
-  <%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
