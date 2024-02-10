@@ -40,7 +40,8 @@
     <h1 class="text-center">Nossos Familiares</h1>
     <p class="text-center">Conheça alguns dos familiares disponíveis para aluguel</p>
     <div class="d-flex flex-wrap my-2 justify-content-around mt-5 mb-5">
-      <% @family_members.first(6).each do |family_member| %>
+    <% if !@family_members.empty? %>
+      <% @family_members&.first(6).each do |family_member| %>
         <div class="card bg-white rounded-4 shadow w-25 m-3">
           <div class="d-flex justify-content-center pt-2 mt-2">
             <%= cl_image_tag(family_member.photo.key, :transformation=>[  {:aspect_ratio=>"1.2",:height=>230, :crop=>"fill"} ]) %>
@@ -61,5 +62,6 @@
           </div>
         </div>
       <% end %>
+    <% end %>
     </div>
 </div>
