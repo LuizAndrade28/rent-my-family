@@ -1,6 +1,6 @@
 <%= render 'shared/banner'%>
 
-<div class="container mt-5 vh-100">
+<div class="container mt-5">
   <div class="row">
     <div class="col-sm-3">
       <div class="card">
@@ -40,39 +40,30 @@
 </div>
 
 
-
-
-<div class="container mt-5">
-  <h1 class="text-center">Nossos Familiares</h1>
-  <p class="text-center">Conheça alguns dos familiares disponíveis para aluguel</p>
-  <div class="d-flex flex-wrap my-2 justify-content-around">
-    <% @family_members.first(6).each do |family_member| %>
-      <div class="d-flex justify-content-center bg-white rounded-4 shadow w-25 m-3">
-        <div class="p-3 rounded-bottom d-flex flex-column">
-          <div class="d-flex justify-content-center">
-            <%= cl_image_tag(family_member.photo.key, :transformation=>[  {:aspect_ratio=>"1.2",:height=>230, :crop=>"fill"} ], class: "pt-2") %>
+    <h1 class="text-center">Nossos Familiares</h1>
+    <p class="text-center">Conheça alguns dos familiares disponíveis para aluguel</p>
+    <div class="d-flex flex-wrap my-2 justify-content-around">
+      <% @family_members.first(3).each do |family_member| %>
+        <div class="card bg-white rounded-4 shadow w-25 m-3">
+          <div class="d-flex justify-content-center pt-2">
+            <%= cl_image_tag(family_member.photo.key, :transformation=>[  {:aspect_ratio=>"1.2",:height=>230, :crop=>"fill"} ]) %>
           </div>
-          <div class="d-flex flex-column align-items-around">
-            <div class="d-flex mt-2">
+          <div class="card-body">
+            <h5 class="card-title"><%= family_member.first_name %> <span class="text-muted font-weight-normal"><%= family_member.last_name %></span></h5>
+            <p class="card-text text-muted"><%= family_member.description %></p>
+            <div class="d-flex align-items-end justify-content-between pt-3">
               <div>
-                <strong><%= family_member.first_name %></strong>
-                <span class="text-muted font-weight-normal"><%= family_member.last_name %></span>
-                <div class="text-muted"><%= family_member.description %></div>
-              </div>
-            </div>
-            <div class="d-flex align-items-end justify-content-between pt-3 flex-grow">
-              <div>
-                <%if family_member.reviews.sample %>
+                <% if family_member.reviews.sample %>
                   <i class="fa-solid fa-star" style="color: #FFD43B"></i><small class="flex-grow-2"> <%= family_member.reviews.sample.rating%>/5</small>
-                <%else %>
+                <% else %>
                   <i class="fa-solid fa-star" style="color: #FFD43B"></i><small class="flex-grow-2"> -/5</small>
-                <%end%>
+                <% end %>
               </div>
-              <%= link_to "saiba mais!", family_member_path(family_member.id) %>
+              <%= link_to "saiba mais!", family_member_path(family_member.id), class: "btn btn-primary" %>
+              "teste"
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 </div>
