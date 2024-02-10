@@ -5,12 +5,14 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
     @user_orders = current_user.orders
+    @initials = "#{current_user.first_name[0]}#{current_user.last_name[0]}"
   end
 
   def show
     @user = current_user
     @order_review = @user.orders.find(params[:id]).review
     @family_members = @order.family_member
+    @initials = "#{current_user.first_name[0]}#{current_user.last_name[0]}"
   end
 
   def new
@@ -32,7 +34,7 @@ class OrdersController < ApplicationController
     if Order.where(rent_date: date, family_member_id: params[:family_member_id]).empty? && @order.save
       redirect_to order_path(@order)
     else
-      flash[:alert] = "This family member is already booked for this date"
+      flash[:alert] = "Este membro da família já está alugado para esta data. Por favor, escolha outra data."
       render :new
     end
   end

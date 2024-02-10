@@ -71,8 +71,8 @@
         <div class="scroll-card w-100 h-100 border bg-white rounded-4 p-4 d-flex flex-wrap justify-content-center d-none" data-toggle-target="togglableElement" data-toggle-element="familiares">
           <% @family_members.each do |family_member| %>
           <div class="bg-users d-flex flex-column justify-content-between shadow-sm pedidos-box-size h-50 mb-2 me-2">
-            <div class="d-flex justify-content-start align-items-center">
-                <%= cl_image_tag(family_member.photo.key, crop: :thumb, class: "avatar-large me-1", alt: "dropdown menu", gravity: :face) %>
+            <div class="d-flex justify-content-start align-items-center pt-1">
+                <%= cl_image_tag(family_member.photo.key, crop: :thumb, class: "avatar-large me-2", alt: "dropdown menu", gravity: :face) %>
               <div class="ms-2">
                 <p class="f-member-85 p-0 m-0"><strong>Nome: </strong><%= family_member.first_name %></p>
                 <p class="f-member-85 p-0 m-0"><strong>Parentesco: </strong><%= family_member.kinship %></p>
@@ -80,7 +80,7 @@
               </div>
             </div>
             <div class="d-flex justify-content-center align-items-center m-0 h-25">
-              <div class="w-100 p-2 m-0 flex-grow-1">
+              <div class="w-100 m-0 flex-grow-1">
                 <p class="m-0"><%= link_to "Remover", family_member_path(family_member), class: "m-0 text-decoration-none btn btn-warning w-100 fs-6", data: { turbo_method: :delete } %></p>
               </div>
             </div>

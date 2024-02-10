@@ -1,7 +1,7 @@
 .card-category {
   background-size: cover;
   background-position: center;
-  height: 180px;
+  height: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,4 +21,19 @@
 .scroll-card {
   overflow-y: scroll;
   height: 50vh;
+}
+
+.card-title-text-family {
+  font-weight: bold;
+  color: #553326;
+}
+
+.card-text-small-family {
+  font-size: 14px;
+}
+
+.photo-size-family {
+  height: 50%;
+  object-fit: cover;
+  border-radius: 5px;
 }
