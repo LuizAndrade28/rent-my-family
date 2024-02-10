@@ -1,11 +1,10 @@
-
-
 .my-card{
+  padding: 15px;
   max-width: 500px;
   margin: 5rem auto;
   border: 1px solid hsla(0, 0%, 0%, 0.133);
   background-color: #eb9900;
-  background: linear-gradient(0deg, rgba(217, 229, 233, 0.996) 0%, rgba(226, 215, 204, 0.5) 100% );
+  background: linear-gradient(0deg, #f0cbbd 0%, #F4E0BE 100%);
   box-shadow: 0 7px 20px 5px #00000088;
   border-radius: 0.7rem;
   backdrop-filter: blur(1px);
@@ -96,7 +95,7 @@
     border: 1px solid #FFFFFF44;
     box-shadow: 0 7px 50px 10px #000000aa;
     transform: scale(1.015);
-    filter: brightness(1.3);
+    filter: brightness(1.05);
     ::before{
       filter: brightness(0.5);
       top: -100%;

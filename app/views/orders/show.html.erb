@@ -4,8 +4,11 @@
       <div>
         <p> Pedido: <%= @order.id %> </p>
         <p>Nome: <%= @order.family_member.first_name %> <%= @order.family_member.last_name %></p>
+        <br>
         <p>Quantidade de horas alugadas: <%= @order.quantity_hour %></p>
+        <br>
         <p>Criada em: <%= @order.created_at.strftime("%d/%m/%Y") %> </p>
+        <br>
         <p>Aluguel agendado para: <%= @order.rent_date.strftime("%d/%m/%Y") %></p>
       </div>
       <%= link_to "Cancelar pedido", order_path(@order), data: { turbo_method: :delete }, id: "cancel-order", class: "btn btn-danger" %>
