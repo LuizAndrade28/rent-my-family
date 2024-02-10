@@ -1,5 +1,5 @@
 <%= simple_form_for (@family_member) do |f| %>
-  <div class="form-inputs">
+  <div class="form-inputs scroll-form">
     <%= f.error_notification %>
     <% f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
     [:base].present? %>
@@ -14,7 +14,7 @@
     <%= f.input :photo, as: :file, :label => 'Foto' %>
   </div>
 
-  <div class="form-actions">
-    <%= f.submit "Cadastrar", class: "btn btn-primary"%>
+  <div class="form-actions pt-4">
+    <%= f.submit "Cadastrar", class: "btn btn-outline-warning shadow-sm"%>
   </div>
 <% end %>

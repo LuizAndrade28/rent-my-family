@@ -1,67 +1,82 @@
-<div class="container vh-100">
-  <div class="d-flex align-items-center justify-content-around mt-3">
-    <div class="border border-opacity-25 rounded-3 p-2 bg-white shadow-sm">
-      <i class="fa-solid fa-arrow-left fa-2xl"></i>
-    </div>
-    <strong><h1><%= @family_member.profile_title %></h1></strong>
-    <i class="fa-solid fa-people-pulling fa-2xl" style="color: #FFD43B;"></i>
+<div class="container">
+  <div class="d-flex align-items-center justify-content-around mt-5 mb-3">
+    <%= link_to "/", class: "m-0" do %>
+      <div class="rounded-3 p-2 shadow-sm" style="background-color: #FCF5EA ">
+        <i class="fa-solid fa-arrow-left fa-2xl" style="color: #F3DFBD"></i>
+      </div>
+    <% end %>
+    <strong><h1><%= @family_member.profile_title.upcase %></h1></strong>
+    <%= link_to new_family_member_order_path(@family_member), class: "m-0" do %>
+      <div class="rounded-3 p-2 shadow-sm" style="background-color: #FCF5EA">
+        <i class="fa-solid fa-people-pulling fa-2xl shadow" style="color: #F3DFBD;"></i>
+      </div>
+    <% end %>
   </div>
-  <div class="d-flex flex-column justify-content-center">
-    <div class="d-flex justify-content-center align-items-center">
-      <%= cl_image_tag(@family_member.photo.key, class:'my-3 w-50') %>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex justify-content-center align-items-center w-100">
+      <%= cl_image_tag(@family_member.photo.key, class:'mt-3 w-50 shadow-sm border rounded-4') %>
     </div>
-    <div class="d-flex justify-content-center my-3">
-      <p>
-        <strong>Nome:</strong>
-        <%= @name %>
-      </p>
-      <p>
-        <strong>Por que me alugar?</strong>
-        <%= @family_member.description %>
-      </p>
-      <p>
-        <strong>Preço:</strong>
-        <%= "R$#{@family_member.value_hour}" %>/hr
-      </p>
-      <% if user_signed_in? %>
-        <div class="d-flex mb-5">
-          <div class="justify-content-center me-3">
-            <%= link_to 'Alugar', new_family_member_order_path(@family_member), class: "btn btn-success" %>
-          </div>
-          <div class="justify-content-center me-3">
-            <%= link_to 'Voltar', family_members_path, class: "btn btn-success" %>
-          </div>
-        </div>
-        <% else %>
-        <div class="d-flex mb-5">
-          <div class="justify-content-center me-3">
-            <%= link_to 'Alugar', new_family_member_order_path(@family_member), class: "btn btn-success" %>
-          </div>
-          <div class="justify-content-center me-3">
-            <%= link_to 'Voltar', family_members_path, class: "btn btn-success" %>
-          </div>
-        </div>
+    <div class="d-flex flex-column justify-content-center align-items-center mb-3 mt-2 w-100">
+      <% total_rating = 0 %>
+      <% @reviews.each do |review| %>
+        <% total_rating += review.rating %>
       <% end %>
-    </div>
-  <% total_rating = 0 %>
-  <% @reviews.each do |review| %>
-  <div class="d-flex flex-column justify-content-center">
-    <div class="card d-flex justify-content-center align-items-center mb-3 w-50">
-      <div class="card-body">
-        <p class="card-text"><%= review.content %></p>
-        <p class="card-text"><%= review.user.first_name %></p>
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted">Avaliação: <%= review.rating %></small>
-        </div>
+      <% average_rating = @reviews.any? ? (total_rating.to_f / @reviews.size).round(2) : 0 %>
+      <div class="d-flex flex-column justify-content-around w-50">
+        <h2><strong><%= @name %></strong></h2>
+        <span class="d-flex">
+          <p class="me-2"><%= average_rating %>/5</p>
+          <% if @reviews.size == 0 %>
+            <p class="text-secondary text-opacity-50"><%= @reviews.size %> avaliações</p>
+            <% elsif @reviews.size == 1 %>
+            <p class="opacity-50"><%= @reviews.size %> avaliação</p>
+            <% else %>
+            <p class="opacity-50"><%= @reviews.size %> avaliações</p>
+          <% end %>
+
+        </span>
+        <p><%= "R$#{@family_member.value_hour}" %>0/hr</p>
+      </div>
+      <div class="d-flex flex-column justify-content-start w-50">
+        <h5>Por que me alugar?</h5>
+        <p> <%= @family_member.description %></p>
       </div>
     </div>
-    <% total_rating += review.rating %>
-  <% end %>
-
-  <% average_rating = @reviews.any? ? (total_rating.to_f / @reviews.size).round(2) : 0 %>
-
-  <div class="mt-3">
-    <strong>Média de avaliações: </strong><%= average_rating %>
   </div>
+  <div class="d-flex flex-column align-items-center justify-content-center mb-3 w-100" data-controller="untoggle">
+    <span class="d-flex justify-content-between w-50 mb-3 border-top pt-2">
+      <h5>Avaliações (<%= @reviews.size %>)</h5>
+      <p data-action="click->untoggle#show" class="text-secondary f-review-90 btn p-0 m-0 border border-0">Mostrar todas</p>
+    </span>
+    <div class="d-flex justify-content-center d-none w-100"  data-untoggle-target="togglableElement">
+      <% @reviews.each do |review| %>
+
+        <div class="justify-content-center mt-2">
+          <div class="card m-0 justify-content-start align-items-start mb-3">
+            <div class="card-body w-100">
+              <p class="card-text"><%= review.content %></p>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <% if user_signed_in? %>
+                    <% if current_user.photo.key %>
+                      <%= cl_image_tag(current_user.photo.key, height: 45, width: 45, crop: :thumb, class: "avatar-small", alt: "dropdown menu", gravity: :face) %>
+                    <% else %>
+                      <span class="d-flex justify-content-center align-items-center text-warning fs-5 avatar-small" style="background-color:#F4E0BE">
+                        <%= current_user.first_name[0].capitalize %>
+                      </span>
+                    <% end %>
+                  <% end %>
+                  <p class="card-text m-0 ms-2"><%= review.user.first_name %></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="m-0 me-2">Avaliação: <%= review.rating %>/5</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        </div>
+
+      </div>
   </div>
 </div>

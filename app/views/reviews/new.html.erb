@@ -1,21 +1,20 @@
-<div class="container mt-5 text-allign">
+<div class="container w-75 mt-5 text-allign">
   <h1>Criar review</h1>
   <p>Escreva um review para o seu pedido</p>
 </div>
 
-<div class="container mt-5 flex-item-align-text">
+<div class="container w-75 mt-5 flex-item-align-text">
   <%= simple_form_for [@order, @review] do |f| %>
   <%= f.error_notification %>
   <% f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
   [:base].present? %>
   <div class="form-inputs">
-    <%= f.input :content, :label => 'Escreva seu review' %>
-    <%= f.input :rating, :label => 'Avalie de 1 a 5' %>
+    <%= f.input :content, :label => 'Escreva seu review', class: "text-warning" %>
+    <%= f.input :rating, :label => 'Dê uma nota de 1 a 5'%>
   </div>
-  <div class="form-actions">
-    <%= f.submit 'Criar', class: "btn btn-primary"%>
+  <div class="form-actions d-flex justify-content-between mt-4">
+    <%= f.submit 'Criar review', class: "btn btn-outline-warning w-25 fw-bold"%>
+    <%= link_to 'Voltar', orders_path, class: "btn btn btn-outline-warning w-25 fw-bold" %>
   </div>
 <% end %>
-  <br>
-  <%= link_to 'Voltar', orders_path, class: "btn btn-success" %>
 </div>
