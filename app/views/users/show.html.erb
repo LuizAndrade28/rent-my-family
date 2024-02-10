@@ -1,5 +1,5 @@
 <!-- index.html -->
-<div class="border bg-users h-100 p-5">
+<div class="border h-100 p-5">
   <div class="border bg-white h-100 p-5 shadow">
     <div class="h-100 d-flex p-2" data-controller="toggle">
       <div class="d-flex flex-column w-25">
@@ -16,45 +16,72 @@
           <h4 class="fw-bold text-white m-0">Novo cadastro</h4>
         </div>
       </div>
-      <div class="d-flex w-75 m-3 p-2 bg-warning rounded-4 shadow">
-        <div class="w-100 h-100 border bg-white rounded-4 p-5" data-toggle-target="togglableElement" data-toggle-element="dados">
+      <div class="d-flex w-75 m-3 p-2 bg-warning rounded-4 shadow" style="height:60vh">
+        <div class="w-100 h-100 border bg-white rounded-4 p-4" data-toggle-target="togglableElement" data-toggle-element="dados">
          <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex align-items-center">
-          <li><strong>Nome:</strong> <%= @name %></li>
+          <i class="fa-solid fa-person fa-lg m-0 p-0 me-2" style="color: #7e4e3d;"></i>
+          <p class="m-0 p-0"><strong>Nome:</strong> <%= @name %></p>
          </div>
          <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex align-items-center">
-          <li><strong>Email:</strong> <%= current_user.email %></li>
+          <i class="fa-solid fa-at m-0 p-0 me-2" style="color: #7e4e3d;"></i>
+          <p class="m-0 p-0"><strong>Email:</strong> <%= current_user.email %></p>
          </div>
          <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex align-items-center">
-          <li><strong>Senha:</strong> **********</li>
+          <i class="fa-solid fa-lock m-0 p-0 me-2" style="color: #7e4e3d;"></i>
+          <p class="m-0 p-0"><strong>Senha:</strong> **********</p>
          </div>
-         <div class="rounded-3 mt-5 mx-1 w-50">
+         <div class="rounded-3 mt-4 mx-1 w-50">
             <%= link_to "Editar", edit_user_registration_path, class: "btn btn-outline-warning rounded-3 shadow-sm w-25" %>
          </div>
         </div>
-        <div class="w-100 h-100 border bg-white rounded-4 p-5 d-none" data-toggle-target="togglableElement" data-toggle-element="pedidos">
+        <div class="scroll-card w-100 h-100 border bg-white rounded-4 p-4 d-none" data-toggle-target="togglableElement" data-toggle-element="pedidos">
           <% @orders.each do |order| %>
             <div class="border shadow-sm rounded-3 mx-1 mb-2 h-25 bg-users d-flex justify-content-between align-items-center">
-              <li><strong>Pedido número:</strong> ID#RMF<%= @initials   %><%= order.id %></li>
-              <span class="text-secondary text-opacity-50">Visualizar</span>
+              <span class="d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-clipboard-user m-0 p-0 me-2" style="color: #7e4e3d;"></i>
+                <p class="m-0 p-0"><strong>Pedido número:</strong> ID#RMF<%= @initials   %><%= order.id %></p>
+              </span>
+              <span class="text-warning text-opacity-25" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Visualizar
+              </span>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content  shadow-sm rounded-4">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Pedido número:</strong> ID#RMF<%= @initials   %><%= order.id %></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Nome: <%= order.family_member.first_name %> <%= order.family_member.last_name %></p>
+                      <p>Quantidade de horas alugadas: <%= order.quantity_hour %></p>
+                      <p>Criada em: <%= order.created_at.strftime("%d/%m/%Y") %> </p>
+                      <p>Aluguel agendado para: <%= order.rent_date.strftime("%d/%m/%Y") %></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           <% end %>
         </div>
-        <div class="w-100 h-100 border bg-white rounded-4 p-5 d-flex flex-wrap justify-content-center d-none" data-toggle-target="togglableElement" data-toggle-element="familiares">
+        <div class="scroll-card w-100 h-100 border bg-white rounded-4 p-4 d-flex flex-wrap justify-content-center d-none" data-toggle-target="togglableElement" data-toggle-element="familiares">
           <% @family_members.each do |family_member| %>
-          <div class="bg-users d-flex flex-column flex-grow-1 justify-content-around p-3 shadow-sm pedidos-box-size h-50 mb-2 mx-5">
+          <div class="bg-users d-flex flex-column justify-content-between shadow-sm pedidos-box-size h-50 mb-2 me-2">
             <div class="d-flex justify-content-start align-items-center">
-              <div class="">
-                <%= cl_image_tag(family_member.photo.key, crop: :thumb, class: "avatar-large me-4", alt: "dropdown menu", gravity: :face) %>
-              </div>
+                <%= cl_image_tag(family_member.photo.key, crop: :thumb, class: "avatar-large me-1", alt: "dropdown menu", gravity: :face) %>
               <div class="ms-2">
                 <p class="f-member-85 p-0 m-0"><strong>Nome: </strong><%= family_member.first_name %></p>
                 <p class="f-member-85 p-0 m-0"><strong>Parentesco: </strong><%= family_member.kinship %></p>
                 <p class="f-member-85 p-0 m-0"><strong>Valor: </strong>R$<%= family_member.value_hour %>/hr</p>
               </div>
             </div>
-            <div class="d-flex">
-              <div class="btn btn-outline-warning w-100 p-2 flex-grow-1">
-                <p class="m-0">Visualizar</p>
+            <div class="d-flex justify-content-center align-items-center m-0 h-25">
+              <div class="w-100 p-2 m-0 flex-grow-1">
+                <p class="m-0"><%= link_to "Remover", family_member_path(family_member), class: "m-0 text-decoration-none btn btn-warning w-100 fs-6", data: { turbo_method: :delete } %></p>
               </div>
             </div>
           </div>
@@ -70,7 +97,7 @@
         <div class="w-100"></div>
         <div class="w-50"></div>
         <div class="w-25 shadow-sm">
-          <p class="m-0"> <%= link_to "Voltar", "/", class: "btn btn-outline-warning w-100 shadow-sm"%> </p>
+          <span class="m-0"> <%= link_to "Voltar", "/", class: "btn btn-outline-warning w-100 shadow-sm"%></span>
         </div>
       </div>
     </div>

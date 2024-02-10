@@ -1,3 +1,9 @@
+.avatar-small {
+  vertical-align: middle;
+  width: 25;
+  height: 25;
+  border-radius: 50%;
+}
 .avatar {
   vertical-align: middle;
   width: 50px;
@@ -6,6 +12,7 @@
 }
 
 .avatar-large {
+  vertical-align: middle;
   width: 80px;
   height: 80px;
   border-radius: 50%;

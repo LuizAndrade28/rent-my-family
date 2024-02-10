@@ -7,11 +7,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    @family_member = @order.family_member
     @review = Review.new(review_params)
     @review.user = current_user
     @review.order_id = @order.id
     if @review.save
-      redirect_to orders_path
+      redirect_to family_member_path(@family_member), notice: 'Review was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end

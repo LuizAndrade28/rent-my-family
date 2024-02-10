@@ -39,8 +39,14 @@ class FamilyMembersController < ApplicationController
   end
 
   def destroy
-    @family_member.destroy
-    redirect_to family_members_path, status: :see_other
+    @user = current_user
+    if @family_member.orders.any?
+      flash[:alert] = "Você não pode deletar alguém que contenha pedidos em aberto."
+      redirect_to user_path, status: :see_other
+    else
+      @family_member.destroy
+      redirect_to family_members_path, status: :see_other
+    end
   end
 
   private
