@@ -1,78 +1,64 @@
 <%= render 'shared/banner'%>
-
-<div class="container mt-5 vh-100">
-  <div class="row">
+<div class="container mt-5">
+  <div class="row mt-2">
     <div class="col-sm-3">
       <div class="card">
-        <div class="card-body sm-3">
-          <h5 class="card-title"><strong>Conforto Familiar Sob Medida</strong></h5>
-          <p class="card-text"><p>Seja para uma festa de aniversário, um jantar importante ou um simples passeio no parque, você pode encontrar o familiar ideal para cada ocasião.
+        <div class="card-body bg-info rounded-4 sm-3">
+          <h5 class="card-title-text-family"><strong>Conforto Familiar Sob Medida</strong></h5>
+          <p class="card-text">Seja para uma festa de aniversário, um jantar importante ou um simples passeio no parque, você pode encontrar o familiar ideal para cada ocasião.
           Escolha entre uma variedade de perfis cuidadosamente selecionados para atender às suas necessidades.</p>
         </div>
       </div>
     </div>
-    <div class="col-sm-3  ">
+    <div class="col-sm-3">
       <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><strong>Segurança e Confiabilidade</strong></h5>
-          <p class="card-text"><p> Nossa plataforma garante uma experiência segura e confiável. Todos os familiares passam por um rigoroso processo de seleção e verificação de antecedentes para garantir que você esteja em boas mãos.</p>
+        <div class="card-body bg-info rounded-4 sm-3">
+          <h5 class="card-title-text-family"><strong>Segurança e Confiabilidade</strong></h5>
+          <p class="card-text">Nossa plataforma garante uma experiência segura e confiável. Todos os familiares passam por um rigoroso processo de seleção e verificação de antecedentes para garantir que você esteja em boas mãos.</p>
         </div>
       </div>
     </div>
-
     <div class="col-sm-3">
     <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><strong>Facilidade de Uso</strong></h5>
-        <p class="card-text"><p>Alugar um familiar nunca foi tão fácil! Basta navegar em nossa plataforma intuitiva, escolher o perfil que melhor se adapta às suas necessidades e fazer a reserva. É simples assim!</p>
+      <div class="card-body bg-info rounded-4 sm-3">
+        <h5 class="card-title-text-family"><strong>Facilidade de Uso</strong></h5>
+        <p class="card-text">Alugar um familiar nunca foi tão fácil! Basta navegar em nossa plataforma intuitiva, escolher o perfil que melhor se adapta às suas necessidades e fazer a reserva. É simples assim!</p>
       </div>
     </div>
   </div>
-
   <div class="col-sm-3">
     <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><strong> Variedade de Serviços </strong></h5>
-        <p class="card-text"><p> Além de oferecer companhia para eventos sociais, nossos familiares estão disponíveis para uma variedade de serviços, desde tutoria acadêmica até assistência em tarefas domésticas. Não importa qual seja a sua necessidade, estamos aqui para ajudar.</p>
+      <div class="card-body bg-info rounded-4 sm-3">
+        <h5 class="card-title-text-family"><strong> Variedade de Serviços </strong></h5>
+        <p class="card-text"><p> Além de oferecer companhia para eventos sociais, nossos familiares estão disponíveis para uma variedade de serviços, desde tutoria acadêmica até assistência em tarefas domésticas. Não importa qual seja a sua necessidade, est
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-<div class="container mt-5">
-  <h1 class="text-center">Nossos Familiares</h1>
-  <p class="text-center">Conheça alguns dos familiares disponíveis para aluguel</p>
-  <div class="d-flex flex-wrap my-2 justify-content-around">
-    <% @family_members.first(6).each do |family_member| %>
-      <div class="d-flex justify-content-center bg-white rounded-4 shadow w-25 m-3">
-        <div class="p-3 rounded-bottom d-flex flex-column">
-          <div class="d-flex justify-content-center">
-            <%= cl_image_tag(family_member.photo.key, :transformation=>[  {:aspect_ratio=>"1.2",:height=>230, :crop=>"fill"} ], class: "pt-2") %>
+  <div class="container mt-5">
+    <h1 class="text-center">Nossos Familiares</h1>
+    <p class="text-center">Conheça alguns dos familiares disponíveis para aluguel</p>
+    <div class="d-flex flex-wrap my-2 justify-content-around mt-5 mb-5">
+      <% @family_members.first(6).each do |family_member| %>
+        <div class="card bg-white rounded-4 shadow w-25 m-3">
+          <div class="d-flex justify-content-center pt-2 mt-2">
+            <%= cl_image_tag(family_member.photo.key, :transformation=>[  {:aspect_ratio=>"1.2",:height=>230, :crop=>"fill"} ]) %>
           </div>
-          <div class="d-flex flex-column align-items-around">
-            <div class="d-flex mt-2">
+          <div class="card-body">
+            <h5><%= family_member.first_name %> <span class="wefont-ight-normal"><%= family_member.last_name %></span></h5>
+            <p><%= family_member.description %></p>
+            <div class="d-flex align-items-end justify-content-between pt-3">
               <div>
-                <strong><%= family_member.first_name %></strong>
-                <span class="text-muted font-weight-normal"><%= family_member.last_name %></span>
-                <div class="text-muted"><%= family_member.description %></div>
-              </div>
-            </div>
-            <div class="d-flex align-items-end justify-content-between pt-3 flex-grow">
-              <div>
-                <%if family_member.reviews.sample %>
+                <% if family_member.reviews.sample %>
                   <i class="fa-solid fa-star" style="color: #FFD43B"></i><small class="flex-grow-2"> <%= family_member.reviews.sample.rating%>/5</small>
-                <%else %>
+                <% else %>
                   <i class="fa-solid fa-star" style="color: #FFD43B"></i><small class="flex-grow-2"> -/5</small>
-                <%end%>
+                <% end %>
               </div>
-              <%= link_to "saiba mais!", family_member_path(family_member.id) %>
+              <%= link_to "Saiba mais!", family_member_path(family_member.id), class: "btn btn-warning rounded-3 shadow-sm" %>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 </div>

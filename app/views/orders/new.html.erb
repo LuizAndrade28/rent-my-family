@@ -1,22 +1,24 @@
-<div class="card">
-    <div class = container>
-      <h1> Novo Pedido</h1>
-        <br>
-      <div class = container>
-        <div class = row>
-          <div class = col-md-12>
-      <%= simple_form_for [ @family_member, @order ] do |f| %>
-        <%= f.error_notification %>
-        <% f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
-        [:base].present? %>
+<div class="container">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="w-75 mt-5 pt-4 text-allign">
+      <h1>Novo Pedido</h1>
+      <p>Alugue uma família temporária</p>
+    </div>
 
-        <%= f.input :quantity_hour %>
-        <%= f.input :rent_date, as: :date %>
-        <%= f.button :submit, class: "btn btn-primary" %>
-      <% end %>
-        <br>
-        <%= link_to 'Página principal', '/', class: "btn btn-success" %>
+    <div class="w-75 mt-4 mb-5 pb-5 flex-item-align-text">
+      <%= simple_form_for [@family_member, @order] do |f| %>
+      <%= f.error_notification %>
+      <% f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors
+      [:base].present? %>
+      <div class="form-inputs">
+        <%= f.input :quantity_hour,:label => "Quantidade de horas" %>
+        <%= f.input :rent_date, as: :date, :label => "Data de aluguel" %>
       </div>
+      <div class="form-actions d-flex justify-content-between mt-4 pt-2">
+        <%= f.submit 'Criar', class: "btn btn-outline-warning w-25 fw-bold"%>
+        <%= link_to 'Voltar', orders_path, class: "btn btn btn-outline-warning w-25 fw-bold" %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>
